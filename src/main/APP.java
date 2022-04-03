@@ -12,10 +12,10 @@ public class APP {
     }
     public static void calcul (){
         try {
-            int n=38;
+            int n=6;
             IloCplex simplexe = new IloCplex ();
 
-            // déclaration des Variables de décision de type reel
+            // dÃ©claration des Variables de dÃ©cision de type reel
             IloNumVar[][] place = new IloNumVar [n][n];
             for (int i=0;i<n;i++){
                 place[i][0]= simplexe.numVar(0, Double.MAX_VALUE);
@@ -24,7 +24,7 @@ public class APP {
             // declaration de la fonction objectif
             IloLinearNumExpr objectif = simplexe.linearNumExpr();
 
-            // définition des coefficients de la fonction objectif
+            // dÃ©finition des coefficients de la fonction objectif
             for (int i=0;i<n;i++){
                 for (int j=0;j<n;j++){
                     objectif.addTerm(1, place[i][j]);
@@ -32,7 +32,7 @@ public class APP {
                 }
             }
 
-            // Définir le type d'optimisation de la fonction (max)
+            // DÃ©finir le type d'optimisation de la fonction (max)
             simplexe.addMaximize(objectif);
 
 
@@ -59,15 +59,15 @@ public class APP {
 
             simplexe.solve(); // lancer resolution
 
-            // Afficher des résultat
+            // Afficher des rÃ©sultat
             System.out.println("Voici la valeur de la fonction objectif "+ simplexe.getObjValue());
-            System.out.println(" Voici les valeurs des variables de décision: ") ;
+            System.out.println(" Voici les valeurs des variables de dÃ©cision: ") ;
             for (int i=0;i<n;i++)
                 System.out.println( "X"+i+ " = "+ simplexe.getValue(place[i][0]));
             for (int j=0;j<n;j++)
                 System.out.println( "X"+j+ " = "+ simplexe.getValue(place[j][0]));
         } catch (IloException e){
-            System.out.print("Exception levée " + e);
+            System.out.print("Exception levÃ©e " + e);
         }
     }
 }
